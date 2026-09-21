@@ -2,18 +2,19 @@
 
 /* ---------- Configuración ---------- */
 
-// Opciones de ciudad/operador por tipo de transporte (las que pediste).
-// "data" apunta al JSON generado con scripts/build_gtfs.py.
+// Opciones de ciudad/operador por tipo de transporte.
+// "data" apunta al JSON generado con scripts/build_gtfs.py o scripts/build_renfe.py.
 // Sin "data" => de momento el trayecto se registra sin línea/paradas y con km manuales.
 const CIUDADES = {
   "Autobús": [
-    { nombre: "Autobús de Cádiz", data: "data/bahia-cadiz.json" },
+    { nombre: "Autobús de Cádiz" },                       // urbano de Cádiz capital: aún sin datos
+    { nombre: "Consorcio Bahía de Cádiz", data: "data/bahia-cadiz.json" },
     { nombre: "TUSSAM Sevilla" },
     { nombre: "EMT Madrid" },
     { nombre: "Otro", otro: true },
   ],
   "Tranvía": [
-    { nombre: "Trambahía", data: "data/bahia-cadiz.json" },
+    { nombre: "Trambahía", data: "data/trambahia.json" },
     { nombre: "Metropolitano de Granada" },
     { nombre: "Otro", otro: true },
   ],
@@ -22,9 +23,12 @@ const CIUDADES = {
     { nombre: "TMB Barcelona" },
   ],
   "Tren": [
-    { nombre: "Cercanías de Cádiz" },
+    { nombre: "Cercanías de Cádiz", data: "data/cercanias-cadiz.json" },
     { nombre: "Cercanías de Madrid" },
     { nombre: "Rodalies de Catalunya" },
+    { nombre: "Otro", otro: true },
+  ],
+  "Otro": [
     { nombre: "Otro", otro: true },
   ],
 };

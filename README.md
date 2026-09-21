@@ -56,22 +56,51 @@ y `dia_semana` están para facilitar las tablas dinámicas del análisis anual.
 **Borrar en la app no borra en la hoja.** La hoja es el registro histórico; si quieres quitar
 una fila, hazlo en la propia hoja.
 
-## Actualizar los datos de una ciudad
+## De dónde salen los datos de cada operador
+
+| Opción en la app | Fichero | Fuente | Estado |
+|---|---|---|---|
+| Autobús → Consorcio Bahía de Cádiz | `data/bahia-cadiz.json` | GTFS del Consorcio de Transportes de Andalucía | ✅ |
+| Tranvía → Trambahía (T1) | `data/trambahia.json` | GTFS de Cercanías de Renfe (núcleo 31, líneas T) | ✅ |
+| Tren → Cercanías de Cádiz (C1, C1a) | `data/cercanias-cadiz.json` | GTFS de Cercanías de Renfe (núcleo 31, líneas C) | ✅ |
+| Autobús → Autobús de Cádiz (urbano) | — | No hay GTFS público; pendiente (ver abajo) | ⏳ km manuales |
+| Resto de operadores | — | Sin datos todavía | km manuales |
+
+Los km se calculan siguiendo el trazado real de la línea (no en línea recta).
+
+### Regenerar Consorcio Bahía de Cádiz
 
 ```bash
-# 1. Descarga el GTFS unificado y descomprímelo en una carpeta
-#    https://api.ctan.es/v1/datos/UNIFICADO/gtfs.zip
-# 2. Genera el JSON (prefijo del consorcio: 1_ Sevilla, 2_ Bahía de Cádiz,
-#    3_ Granada, 4_ Málaga, 5_ Campo de Gibraltar, 6_ Almería,
-#    7_ Jaén, 8_ Córdoba, 9_ Huelva)
+# GTFS unificado: https://api.ctan.es/v1/datos/UNIFICADO/gtfs.zip  (carpeta o .zip)
 python3 scripts/build_gtfs.py RUTA_GTFS 2_ data/bahia-cadiz.json
+# Prefijos: 1_ Sevilla, 2_ Bahía de Cádiz, 3_ Granada, 4_ Málaga, 5_ Campo de Gibraltar,
+#           6_ Almería, 7_ Jaén, 8_ Córdoba, 9_ Huelva
 ```
+
+### Regenerar Trambahía y Cercanías de Cádiz
+
+```bash
+# Descarga el zip oficial de Renfe (toda España, ~2 MB):
+#   https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip
+# No hace falta descomprimirlo (de hecho, algunos descompresores fallan con él):
+python3 scripts/build_renfe.py fomento_transit.zip 31T C data/cercanias-cadiz.json
+python3 scripts/build_renfe.py fomento_transit.zip 31T T data/trambahia.json
+```
+
+`31T` es el núcleo de Cádiz y la última letra filtra por tipo (`C` cercanías, `T` tranvía).
+Otros núcleos de Renfe se generan igual cambiando el prefijo (por ejemplo `10T` Madrid).
+El script tarda un minuto porque el zip contiene un `stop_times.txt` de ~280 MB. Al final
+imprime una comprobación por sentido: **si alguna parada queda a más de 300 m del trazado
+avisa con «!!»; en ese caso no uses el resultado sin revisarlo.**
+
+> Nota: el feed de Renfe dibuja algunos trazados en sentido contrario al del tren que los
+> usa. El script lo detecta solo (prueba ambas orientaciones y se queda con la que encaja).
 
 ## Añadir otro operador
 
-1. Genera su JSON con el script y guárdalo en `data/`.
+1. Genera su JSON con el script que corresponda y guárdalo en `data/`.
 2. En `app.js`, dentro de `CIUDADES`, añade `data: "data/su-archivo.json"` a la entrada.
-3. Añade el archivo a `ARCHIVOS` en `sw.js` y sube `VERSION` (por ejemplo a `"v2"`).
+3. Añade el archivo a `ARCHIVOS` en `sw.js` y sube `VERSION`.
 
 ## Actualizar la app tras cambios
 
