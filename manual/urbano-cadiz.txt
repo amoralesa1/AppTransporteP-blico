@@ -1,0 +1,34 @@
+# Autobús urbano de Cádiz (Tranvía de Cádiz a San Fernando y Carraca).
+# No existe GTFS público: las coordenadas se tomaron a mano (Google/Apple Maps).
+# Los km se calculan sumando la distancia en línea recta entre paradas consecutivas (aproximados).
+#
+# Formato (campos separados por "|"):
+#   fuente  | id | nombre
+#   parada  | id | nombre | latitud | longitud        (decimal o 36°29'52.7"N)
+#   linea   | codigo | nombre | color_hex
+#   sentido | codigo_linea | numero | ids de parada en orden, separados por espacios
+
+fuente | urbano-cadiz | Autobús urbano de Cádiz
+
+# ---- Paradas (línea 1) ----
+parada | cortadura       | Cortadura - Complejo Deportivo                 | 36°29'52.7"N | 6°16'19.2"W
+parada | telegrafia      | Telegrafía                                     | 36°30'01.2"N | 6°16'24.0"W
+parada | estadio         | Estadio                                        | 36°30'08.0"N | 6°16'28.1"W
+parada | balneario       | Balneario - Glorieta Ana Orantes               | 36°30'23.0"N | 6°16'36.8"W
+parada | residencia      | Residencia - Hospital Puerta del Mar           | 36°30'33.0"N | 6°16'42.5"W
+parada | san-jose        | San José                                       | 36°30'44.3"N | 6°16'49.0"W
+parada | san-felipe      | San Felipe                                     | 36°30'56.0"N | 6°16'55.6"W
+parada | plaza-asdrubal  | Plaza Asdrúbal - Mercado Virgen del Rosario    | 36°31'04.1"N | 6°17'00.1"W
+parada | comisaria       | Comisaría                                      | 36°31'15.5"N | 6°17'06.7"W
+parada | avda-andalucia  | Avenida Andalucía                              | 36°31'28.3"N | 6°17'13.9"W
+parada | puertas-tierra  | Puertas de Tierra                              | 36°31'37.8"N | 6°17'19.6"W
+parada | renfe           | Renfe - Cuesta de las Calesas                  | 36°31'45.4"N | 6°17'23.0"W
+parada | avda-puerto     | Avenida del Puerto                             | 36°31'54.4"N | 6°17'32.2"W
+parada | plaza-espana    | Plaza España                                   | 36°32'03.1"N | 6°17'34.6"W
+
+# ---- Línea 1 ----
+linea   | 1 | Plaza España – Cortadura | 555555
+# Sentido 0: Cortadura -> Plaza España
+sentido | 1 | 0 | cortadura telegrafia estadio balneario residencia san-jose san-felipe plaza-asdrubal comisaria avda-andalucia puertas-tierra renfe avda-puerto plaza-espana
+# Sentido 1: Plaza España -> Cortadura (en Avenida del Puerto no hay parada en este sentido)
+sentido | 1 | 1 | plaza-espana renfe puertas-tierra avda-andalucia comisaria plaza-asdrubal san-felipe san-jose residencia balneario estadio telegrafia cortadura

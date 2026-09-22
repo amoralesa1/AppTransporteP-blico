@@ -72,6 +72,7 @@
 <body>
 <main>
   <h1>Mis trayectos</h1>
+  <div id="diag" style="font:12px/1.3 monospace;background:#fffbe6;color:#7a5b00;padding:8px 10px;border-radius:8px;margin-bottom:12px;white-space:pre-wrap;"></div>
 
   <form id="form" class="card" autocomplete="off">
     <label><span>Fecha</span><input type="date" id="fecha" required></label>
@@ -94,6 +95,10 @@
 
     <label id="wrapLinea"><span>Línea</span>
       <select id="linea" disabled><option value="">—</option></select>
+    </label>
+
+    <label id="wrapLineaOtra" hidden><span>Línea (número o nombre)</span>
+      <input type="text" id="lineaOtra" placeholder="Ej. 5" autocapitalize="off" spellcheck="false">
     </label>
 
     <label id="wrapSentido"><span>Sentido</span>

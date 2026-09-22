@@ -7,7 +7,7 @@
 // Sin "data" => de momento el trayecto se registra sin línea/paradas y con km manuales.
 const CIUDADES = {
   "Autobús": [
-    { nombre: "Autobús de Cádiz" },                       // urbano de Cádiz capital: aún sin datos
+    { nombre: "Autobús de Cádiz", data: "data/urbano-cadiz.json" },   // urbano de Cádiz capital (solo línea 1; km aprox.)
     { nombre: "Consorcio Bahía de Cádiz", data: "data/bahia-cadiz.json" },
     { nombre: "TUSSAM Sevilla" },
     { nombre: "EMT Madrid" },
@@ -34,6 +34,7 @@ const CIUDADES = {
 };
 
 const STORAGE_KEY = "trayectos.v1";
+const OTRA = "__otra__";     // opción «Otra línea (km a mano)» de los desplegables de línea
 
 /* ---------- Utilidades ---------- */
 
@@ -44,6 +45,7 @@ const el = {
   otroTexto: $("otroTexto"), kmManual: $("kmManual"),
   wrapOtro: $("wrapOtro"), wrapLinea: $("wrapLinea"), wrapSentido: $("wrapSentido"), wrapOrigen: $("wrapOrigen"),
   wrapDestino: $("wrapDestino"), wrapKmManual: $("wrapKmManual"),
+  wrapLineaOtra: $("wrapLineaOtra"), lineaOtra: $("lineaOtra"),
   resultado: $("resultado"), kmTexto: $("kmTexto"), kmNota: $("kmNota"),
   error: $("error"), form: $("form"), historial: $("historial"),
 };
@@ -95,6 +97,7 @@ function resetDesde(nivel) {
   if (nivel <= 3) fillSelect(el.sentido, [], "—");
   if (nivel <= 4) { fillSelect(el.origen, [], "—"); fillSelect(el.destino, [], "—"); }
   el.wrapKmManual.hidden = true; el.kmManual.value = "";
+  el.wrapLineaOtra.hidden = true; el.lineaOtra.value = "";
   kmActual = null; el.resultado.hidden = true;
   mostrarError("");
 }
@@ -132,11 +135,15 @@ el.ciudad.addEventListener("change", async () => {
     .map(([id, r]) => [id, r.code + " · " + r.name])
     .sort((a, b) => a[1].localeCompare(b[1], "es", { numeric: true }));
   fillSelect(el.linea, lineas, "Selecciona la línea…");
+  el.linea.append(new Option("Otra línea (km a mano)", OTRA));
 });
 
 el.linea.addEventListener("change", () => {
   resetDesde(3);
-  if (!datos || !el.linea.value) return;
+  const manual = el.linea.value === OTRA;          // línea sin datos: solo km a mano
+  el.wrapSentido.hidden = el.wrapOrigen.hidden = el.wrapDestino.hidden = manual;
+  el.wrapKmManual.hidden = el.wrapLineaOtra.hidden = !manual;
+  if (!datos || !el.linea.value || manual) return;
   const ruta = datos.routes[el.linea.value];
 
   // Un sentido por cada dirección del GTFS, etiquetado "Origen → Destino".
@@ -187,8 +194,10 @@ function actualizarKm() {
     return;
   }
   kmActual = km;
-  el.kmTexto.textContent = km.toFixed(1).replace(".", ",") + " km";
-  el.kmNota.textContent = "siguiendo el trazado de la línea";
+  el.kmTexto.textContent = (datos.aprox ? "≈ " : "") + km.toFixed(1).replace(".", ",") + " km";
+  el.kmNota.textContent = datos.aprox
+    ? "aproximado: suma de rectas entre paradas (algo menos que el recorrido real)"
+    : "siguiendo el trazado de la línea";
   el.resultado.hidden = false;
 }
 el.origen.addEventListener("change", actualizarKm);
@@ -206,7 +215,8 @@ el.form.addEventListener("submit", (ev) => {
   const cfg = (CIUDADES[el.tipo.value] || []).find((c) => c.nombre === el.ciudad.value);
   let km = kmActual;
 
-  if (cfg && cfg.data && datos) {
+  const esOtra = el.linea.value === OTRA;
+  if (cfg && cfg.data && datos && !esOtra) {
     if (!el.linea.value || el.sentido.value === "" || !el.origen.value || !el.destino.value)
       return mostrarError("Elige línea, sentido, origen y destino.");
     if (km === null) return mostrarError("No se ha podido calcular la distancia con esas paradas.");
@@ -214,20 +224,22 @@ el.form.addEventListener("submit", (ev) => {
     km = el.kmManual.value === "" ? null : parseFloat(el.kmManual.value);
   }
   if (cfg && cfg.otro && !el.otroTexto.value.trim()) return mostrarError("Indica qué transporte es.");
+  if (esOtra && !el.lineaOtra.value.trim()) return mostrarError("Indica qué línea es.");
 
-  const ruta = datos && el.linea.value ? datos.routes[el.linea.value] : null;
+  const ruta = datos && el.linea.value && !esOtra ? datos.routes[el.linea.value] : null;
   const registro = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
     sync: false,
     fecha: el.fecha.value,
     tipo: el.tipo.value,
     ciudad: cfg && cfg.otro ? el.ciudad.value + ": " + el.otroTexto.value.trim() : el.ciudad.value,
-    lineaCodigo: ruta ? ruta.code : "",
+    lineaCodigo: ruta ? ruta.code : (esOtra ? el.lineaOtra.value.trim() : ""),
     lineaNombre: ruta ? ruta.name : "",
     color: ruta ? "#" + ruta.color : "",
     origen: ruta && el.origen.value ? datos.stops[el.origen.value][0] : "",
     destino: ruta && el.destino.value ? datos.stops[el.destino.value][0] : "",
     km: km === null ? null : Math.round(km * 10) / 10,
+    aprox: !!(ruta && datos.aprox),
     espera: parseInt(el.espera.value, 10) || 0,
     trayecto: parseInt(el.trayecto.value, 10) || 0,
   };
@@ -381,7 +393,7 @@ function render() {
     const badge = t.lineaCodigo
       ? `<span class="badge" style="background:${escapeHtml(t.color || "#0b5fff")}">${escapeHtml(t.lineaCodigo)}</span>` : "";
     const ruta = t.origen ? `${escapeHtml(t.origen)} → ${escapeHtml(t.destino)}` : escapeHtml(t.tipo);
-    const kmTxt = t.km === null ? "km sin indicar" : t.km.toFixed(1).replace(".", ",") + " km";
+    const kmTxt = t.km === null ? "km sin indicar" : (t.aprox ? "≈ " : "") + t.km.toFixed(1).replace(".", ",") + " km";
     const marca = t.sync === true ? ' · <span class="ok">✓ en Sheets</span>'
                 : t.sync === false ? ' · <span class="warn">⏳ pendiente</span>' : "";
     return `<div class="trip">
@@ -425,6 +437,25 @@ $("exportar").addEventListener("click", () => {
 });
 
 /* ---------- Arranque ---------- */
+
+(function diagnostico() {
+  const el = document.getElementById("diag");
+  if (!el) return;
+  const modo = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone ? "standalone (icono)" : "navegador (Safari)";
+  let ls = "no disponible";
+  try {
+    const k = "__test__"; localStorage.setItem(k, "1"); localStorage.removeItem(k);
+    ls = "funciona";
+  } catch (e) { ls = "ERROR: " + e.message; }
+  const cfg = (() => { try { return JSON.parse(localStorage.getItem("trayectos.sheets.v1")) || {}; } catch { return {}; } })();
+  el.textContent =
+    "modo: " + modo + "\n" +
+    "origen: " + location.origin + location.pathname + "\n" +
+    "localStorage: " + ls + "\n" +
+    "config. guardada: " + (cfg.url ? "SÍ (" + cfg.url.slice(0, 40) + "…)" : "NO") + "\n" +
+    "trayectos guardados: " + (JSON.parse(localStorage.getItem("trayectos.v1") || "[]").length) + "\n" +
+    "SW activo: " + (navigator.serviceWorker.controller ? "sí" : "no");
+})();
 
 el.fecha.value = hoyLocal();
 migrar();
