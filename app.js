@@ -356,8 +356,10 @@ function guardarAjustes() {
   ui.msg.className = "warn";
   sincronizar();
 }
-ui.url.addEventListener("change", guardarAjustes);
-ui.token.addEventListener("change", guardarAjustes);
+["input", "change"].forEach((ev) => {
+  ui.url.addEventListener(ev, guardarAjustes);
+  ui.token.addEventListener(ev, guardarAjustes);
+});
 ui.sync.addEventListener("click", sincronizar);
 
 ui.probar.addEventListener("click", async () => {

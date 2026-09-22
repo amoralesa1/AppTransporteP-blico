@@ -1,6 +1,6 @@
 // Service worker: cachea la app y los datos para que funcione sin conexion.
 // Al cambiar cualquier archivo, sube el numero de VERSION para forzar la actualizacion.
-const VERSION = "v6";
+const VERSION = "v7";
 const CACHE = "trayectos-" + VERSION;
 const ARCHIVOS = [
   "./", "index.html", "app.js", "manifest.json",
