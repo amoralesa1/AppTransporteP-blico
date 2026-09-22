@@ -261,7 +261,7 @@ el.form.addEventListener("submit", (ev) => {
 const CFG_KEY = "trayectos.sheets.v1";
 const ui = {
   estado: $("syncEstado"), sync: $("sincronizarAhora"), url: $("sheetUrl"),
-  token: $("sheetToken"), probar: $("probarConexion"), msg: $("cfgMsg"),
+  token: $("sheetToken"), probar: $("probarConexion"), msg: $("cfgMsg"), ajustes: $("ajustes"),
 };
 let sincronizando = false;
 let ultimoError = "";
@@ -331,6 +331,10 @@ async function sincronizar() {
 
 function pintarEstado(lista) {
   const l = lista || leer();
+  if (!configurado() && !ui.ajustes.dataset.abiertoAuto) {
+    ui.ajustes.open = true;
+    ui.ajustes.dataset.abiertoAuto = "1";   // solo lo forzamos una vez; si el usuario lo cierra, se respeta
+  }
   const pend = l.filter((t) => t.sync === false).length;
   let txt, cls = "";
   if (!configurado()) {
