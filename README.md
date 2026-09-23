@@ -63,7 +63,8 @@ una fila, hazlo en la propia hoja.
 | Autobús → Consorcio Bahía de Cádiz | `data/bahia-cadiz.json` | GTFS del Consorcio de Transportes de Andalucía | ✅ |
 | Tranvía → Trambahía (T1) | `data/trambahia.json` | GTFS de Cercanías de Renfe (núcleo 31, líneas T) | ✅ |
 | Tren → Cercanías de Cádiz (C1, C1a) | `data/cercanias-cadiz.json` | GTFS de Cercanías de Renfe (núcleo 31, líneas C) | ✅ |
-| Autobús → Autobús de Cádiz (urbano) | — | No hay GTFS público; pendiente (ver abajo) | ⏳ km manuales |
+| Autobús → Autobús de Cádiz (urbano) | `data/urbano-cadiz.json` | Coordenadas tomadas a mano (`manual/urbano-cadiz.txt`); no hay GTFS público | ✅ línea 1 · km aprox.; líneas 2, 3, 5 y 7 pendientes |
+| Metro → Metro de Madrid | `data/madrid-metro.json` | Coordenadas tomadas de Wikipedia (`manual/madrid-metro.txt`); no hay GTFS público | ✅ líneas 1, 3, 4, 6, 8 y 10 · km aprox. |
 | Resto de operadores | — | Sin datos todavía | km manuales |
 
 Los km se calculan siguiendo el trazado real de la línea (no en línea recta).

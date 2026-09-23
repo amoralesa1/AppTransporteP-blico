@@ -1,0 +1,187 @@
+# Metro de Madrid. Coordenadas tomadas de Wikipedia (una estacion a una, sin GTFS accesible).
+# Los km se calculan sumando la distancia en linea recta entre paradas consecutivas (aproximados).
+#
+# Formato: ver manual/urbano-cadiz.txt para el detalle completo.
+
+fuente | madrid-metro | Metro de Madrid
+
+# ---- Línea 8 ----
+parada | l8-nuevos-ministerios | Nuevos Ministerios     | 40°26'48"N | 3°41'33"W
+parada | l8-colombia           | Colombia               | 40°27'23"N | 3°40'37"W
+parada | l8-pinar-del-rey      | Pinar del Rey           | 40°28'05"N | 3°38'55"W
+parada | l8-mar-de-cristal     | Mar de Cristal          | 40°28'10"N | 3°38'18"W
+parada | l8-feria-de-madrid    | Feria de Madrid         | 40°27'50"N | 3°36'58"W
+parada | l8-aeropuerto-t123    | Aeropuerto T1-T2-T3     | 40°28'07"N | 3°34'11"W
+parada | l8-barajas            | Barajas                 | 40°28'33"N | 3°34'57"W
+parada | l8-aeropuerto-t4      | Aeropuerto T4           | 40°29'30"N | 3°35'37"W
+
+linea   | 8 | Nuevos Ministerios – Aeropuerto T4 | fbb42a
+sentido | 8 | 0 | l8-nuevos-ministerios l8-colombia l8-pinar-del-rey l8-mar-de-cristal l8-feria-de-madrid l8-aeropuerto-t123 l8-barajas l8-aeropuerto-t4
+sentido | 8 | 1 | l8-aeropuerto-t4 l8-barajas l8-aeropuerto-t123 l8-feria-de-madrid l8-mar-de-cristal l8-pinar-del-rey l8-colombia l8-nuevos-ministerios
+
+# ---- Línea 1 (33 paradas completas) ----
+# Orden: Pinar de Chamartín -> Valdecarros (vía Sol)
+parada | l1-pinar-de-chamartin | Pinar de Chamartín | 40°28'48"N | 3°40'00"W
+parada | l1-bambu              | Bambú              | 40°28'37"N | 3°40'35"W
+parada | l1-chamartin          | Chamartín          | 40°28'20"N | 3°40'58"W
+parada | l1-plaza-de-castilla  | Plaza de Castilla  | 40°28'01"N | 3°41'21"W
+parada | l1-valdeacederas      | Valdeacederas      | 40°27'52"N | 3°41'42"W
+parada | l1-tetuan             | Tetuán             | 40°27'38"N | 3°41'54"W
+parada | l1-estrecho           | Estrecho           | 40°27'15"N | 3°42'11"W
+parada | l1-alvarado           | Alvarado           | 40°27'01"N | 3°42'12"W
+parada | l1-cuatro-caminos     | Cuatro Caminos     | 40°26'49"N | 3°42'14"W
+parada | l1-rios-rosas         | Ríos Rosas         | 40°26'31"N | 3°42'05"W
+parada | l1-iglesia            | Iglesia            | 40°26'06"N | 3°41'56"W
+parada | l1-bilbao             | Bilbao             | 40°25'45"N | 3°42'08"W
+parada | l1-tribunal           | Tribunal           | 40°25'34"N | 3°42'04"W
+parada | l1-gran-via           | Gran Vía           | 40°25'12"N | 3°42'06"W
+parada | l1-sol                | Sol                | 40°25'00"N | 3°42'13"W
+parada | l1-tirso-de-molina    | Tirso de Molina    | 40°24'44"N | 3°42'17"W
+parada | l1-anton-martin       | Antón Martín       | 40°24'45"N | 3°41'58"W
+parada | l1-estacion-del-arte  | Estación del Arte  | 40°24'32"N | 3°41'33"W
+parada | l1-atocha-renfe       | Atocha Renfe       | 40°24'23"N | 3°41'21"W
+parada | l1-menendez-pelayo    | Menéndez Pelayo    | 40°24'16"N | 3°40'52"W
+parada | l1-pacifico           | Pacífico           | 40°24'05"N | 3°40'30"W
+parada | l1-puente-de-vallecas | Puente de Vallecas | 40°23'54"N | 3°40'09"W
+parada | l1-nueva-numancia     | Nueva Numancia     | 40°23'44"N | 3°39'51"W
+parada | l1-portazgo           | Portazgo           | 40°23'34"N | 3°39'31"W
+parada | l1-buenos-aires       | Buenos Aires       | 40°23'30"N | 3°39'14"W
+parada | l1-alto-del-arenal    | Alto del Arenal    | 40°23'23"N | 3°38'43"W
+parada | l1-miguel-hernandez   | Miguel Hernández   | 40°23'15"N | 3°38'23"W
+parada | l1-sierra-de-guadalupe| Sierra de Guadalupe| 40°22'57"N | 3°37'30"W
+parada | l1-villa-de-vallecas  | Villa de Vallecas  | 40°22'47"N | 3°37'17"W
+parada | l1-congosto           | Congosto           | 40°22'21"N | 3°37'08"W
+parada | l1-la-gavia           | La Gavia           | 40°22'09"N | 3°36'45"W
+parada | l1-las-suertes        | Las Suertes        | 40°21'48"N | 3°35'58"W
+parada | l1-valdecarros        | Valdecarros        | 40°21'36"N | 3°35'35"W
+
+
+linea   | 1 | Pinar de Chamartín – Valdecarros | 00AEEF
+sentido | 1 | 0 | l1-pinar-de-chamartin l1-bambu l1-chamartin l1-plaza-de-castilla l1-valdeacederas l1-tetuan l1-estrecho l1-alvarado l1-cuatro-caminos l1-rios-rosas l1-iglesia l1-bilbao l1-tribunal l1-gran-via l1-sol l1-tirso-de-molina l1-anton-martin l1-estacion-del-arte l1-atocha-renfe l1-menendez-pelayo l1-pacifico l1-puente-de-vallecas l1-nueva-numancia l1-portazgo l1-buenos-aires l1-alto-del-arenal l1-miguel-hernandez l1-sierra-de-guadalupe l1-villa-de-vallecas l1-congosto l1-la-gavia l1-las-suertes l1-valdecarros
+sentido | 1 | 1 | l1-valdecarros l1-las-suertes l1-la-gavia l1-congosto l1-villa-de-vallecas l1-sierra-de-guadalupe l1-miguel-hernandez l1-alto-del-arenal l1-buenos-aires l1-portazgo l1-nueva-numancia l1-puente-de-vallecas l1-pacifico l1-menendez-pelayo l1-atocha-renfe l1-estacion-del-arte l1-anton-martin l1-tirso-de-molina l1-sol l1-gran-via l1-tribunal l1-bilbao l1-iglesia l1-rios-rosas l1-cuatro-caminos l1-alvarado l1-estrecho l1-tetuan l1-valdeacederas l1-plaza-de-castilla l1-chamartin l1-bambu l1-pinar-de-chamartin
+
+# ---- Línea 3 (19 paradas completas, incl. extensión a El Casar de 2025) ----
+parada | l3-moncloa            | Moncloa            | 40°26'07"N | 3°43'09"W
+parada | l3-arguelles           | Argüelles          | 40°25'50"N | 3°42'57"W
+parada | l3-ventura-rodriguez   | Ventura Rodríguez  | 40°25'38"N | 3°42'48"W
+parada | l3-plaza-de-espana     | Plaza de España    | 40°25'24"N | 3°42'40"W
+parada | l3-callao              | Callao             | 40°25'12"N | 3°42'21"W
+parada | l3-sol                 | Sol                | 40°25'00"N | 3°42'13"W
+parada | l3-lavapies            | Lavapiés           | 40°24'31"N | 3°42'03"W
+parada | l3-embajadores         | Embajadores        | 40°24'16"N | 3°42'15"W
+parada | l3-palos-de-la-frontera| Palos de la Frontera| 40°24'11"N | 3°41'39"W
+parada | l3-delicias            | Delicias           | 40°24'00"N | 3°41'39"W
+parada | l3-legazpi             | Legazpi            | 40°23'28"N | 3°41'42"W
+parada | l3-almendrales         | Almendrales        | 40°23'03"N | 3°41'52"W
+parada | l3-hospital-12-octubre | Hospital 12 de Octubre| 40°22'30"N | 3°41'45"W
+parada | l3-san-fermin-orcasur  | San Fermín-Orcasur | 40°22'12"N | 3°41'39"W
+parada | l3-ciudad-de-los-angeles| Ciudad de los Ángeles| 40°21'34"N | 3°41'37"W
+parada | l3-villaverde-bajo-cruce| Villaverde Bajo-Cruce| 40°21'03"N | 3°41'34"W
+parada | l3-san-cristobal       | San Cristóbal      | 40°20'29"N | 3°41'34"W
+parada | l3-villaverde-alto     | Villaverde Alto    | 40°20'30"N | 3°42'45"W
+parada | l3-el-casar            | El Casar           | 40°19'06"N | 3°42'35"W
+
+linea   | 3 | Moncloa – El Casar | FFF200
+sentido | 3 | 0 | l3-moncloa l3-arguelles l3-ventura-rodriguez l3-plaza-de-espana l3-callao l3-sol l3-lavapies l3-embajadores l3-palos-de-la-frontera l3-delicias l3-legazpi l3-almendrales l3-hospital-12-octubre l3-san-fermin-orcasur l3-ciudad-de-los-angeles l3-villaverde-bajo-cruce l3-san-cristobal l3-villaverde-alto l3-el-casar
+sentido | 3 | 1 | l3-el-casar l3-villaverde-alto l3-san-cristobal l3-villaverde-bajo-cruce l3-ciudad-de-los-angeles l3-san-fermin-orcasur l3-hospital-12-octubre l3-almendrales l3-legazpi l3-delicias l3-palos-de-la-frontera l3-embajadores l3-lavapies l3-sol l3-callao l3-plaza-de-espana l3-ventura-rodriguez l3-arguelles l3-moncloa
+
+# ---- Línea 4 (23 paradas completas) ----
+parada | l4-arguelles           | Argüelles          | 40°25'50"N | 3°42'57"W
+parada | l4-san-bernardo        | San Bernardo       | 40°25'47"N | 3°42'21"W
+parada | l4-bilbao              | Bilbao             | 40°25'45"N | 3°42'08"W
+parada | l4-alonso-martinez     | Alonso Martínez    | 40°25'40"N | 3°41'45"W
+parada | l4-colon               | Colón              | 40°25'32"N | 3°41'28"W
+parada | l4-serrano             | Serrano            | 40°25'32"N | 3°41'12"W
+parada | l4-velazquez           | Velázquez          | 40°25'30"N | 3°40'58"W
+parada | l4-goya                | Goya               | 40°25'30"N | 3°40'28"W
+parada | l4-lista                | Lista              | 40°25'45"N | 3°40'31"W
+parada | l4-diego-de-leon       | Diego de León      | 40°26'05"N | 3°40'30"W
+parada | l4-avenida-de-america  | Avenida de América | 40°26'17"N | 3°40'36"W
+parada | l4-prosperidad         | Prosperidad        | 40°26'39"N | 3°40'29"W
+parada | l4-alfonso-xiii        | Alfonso XIII       | 40°26'54"N | 3°40'04"W
+parada | l4-avenida-de-la-paz   | Avenida de la Paz  | 40°27'13"N | 3°39'40"W
+parada | l4-arturo-soria        | Arturo Soria       | 40°27'21"N | 3°39'22"W
+parada | l4-esperanza           | Esperanza          | 40°27'34"N | 3°38'45"W
+parada | l4-canillas            | Canillas           | 40°27'50"N | 3°38'08"W
+parada | l4-mar-de-cristal      | Mar de Cristal     | 40°28'10"N | 3°38'18"W
+parada | l4-san-lorenzo         | San Lorenzo        | 40°28'20"N | 3°38'32"W
+parada | l4-parque-de-santa-maria| Parque de Santa María| 40°28'38"N | 3°38'43"W
+parada | l4-hortaleza           | Hortaleza          | 40°28'31"N | 3°39'09"W
+parada | l4-manoteras           | Manoteras          | 40°28'37"N | 3°39'46"W
+parada | l4-pinar-de-chamartin  | Pinar de Chamartín | 40°28'48"N | 3°40'00"W
+
+linea   | 4 | Argüelles – Pinar de Chamartín | 9E4B9E
+sentido | 4 | 0 | l4-arguelles l4-san-bernardo l4-bilbao l4-alonso-martinez l4-colon l4-serrano l4-velazquez l4-goya l4-lista l4-diego-de-leon l4-avenida-de-america l4-prosperidad l4-alfonso-xiii l4-avenida-de-la-paz l4-arturo-soria l4-esperanza l4-canillas l4-mar-de-cristal l4-san-lorenzo l4-parque-de-santa-maria l4-hortaleza l4-manoteras l4-pinar-de-chamartin
+sentido | 4 | 1 | l4-pinar-de-chamartin l4-manoteras l4-hortaleza l4-parque-de-santa-maria l4-san-lorenzo l4-mar-de-cristal l4-canillas l4-esperanza l4-arturo-soria l4-avenida-de-la-paz l4-alfonso-xiii l4-prosperidad l4-avenida-de-america l4-diego-de-leon l4-lista l4-goya l4-velazquez l4-serrano l4-colon l4-alonso-martinez l4-bilbao l4-san-bernardo l4-arguelles
+
+# ---- Línea 6 (circular, 28 paradas) ----
+# Sentido 0 = "exterior" (clockwise): Cuatro Caminos -> Nuevos Ministerios -> ... -> Guzmán el Bueno -> Cuatro Caminos
+parada | l6-cuatro-caminos      | Cuatro Caminos     | 40°26'49"N | 3°42'14"W
+parada | l6-nuevos-ministerios  | Nuevos Ministerios | 40°26'48"N | 3°41'33"W
+parada | l6-republica-argentina | República Argentina| 40°26'38"N | 3°41'03"W
+parada | l6-avenida-de-america  | Avenida de América | 40°26'17"N | 3°40'36"W
+parada | l6-diego-de-leon       | Diego de León      | 40°26'05"N | 3°40'30"W
+parada | l6-manuel-becerra      | Manuel Becerra     | 40°25'40"N | 3°40'09"W
+parada | l6-odonnell            | O'Donnell          | 40°25'22"N | 3°40'07"W
+parada | l6-sainz-de-baranda    | Sainz de Baranda   | 40°24'54"N | 3°40'10"W
+parada | l6-conde-de-casal      | Conde de Casal     | 40°24'25"N | 3°40'13"W
+parada | l6-pacifico            | Pacífico           | 40°24'05"N | 3°40'30"W
+parada | l6-mendez-alvaro       | Méndez Álvaro      | 40°23'44"N | 3°40'42"W
+parada | l6-arganzuela-planetario| Arganzuela-Planetario| 40°23'36"N | 3°41'19"W
+parada | l6-usera               | Usera              | 40°23'14"N | 3°42'25"W
+parada | l6-legazpi             | Legazpi            | 40°23'28"N | 3°41'42"W
+parada | l6-plaza-eliptica      | Plaza Elíptica     | 40°23'04"N | 3°43'06"W
+parada | l6-opanel              | Opañel             | 40°23'13"N | 3°43'23"W
+parada | l6-oporto              | Oporto             | 40°23'18"N | 3°43'53"W
+parada | l6-carpetana           | Carpetana          | 40°23'34"N | 3°44'28"W
+parada | l6-laguna              | Laguna             | 40°23'57"N | 3°44'39"W
+parada | l6-lucero              | Lucero             | 40°24'17"N | 3°44'44"W
+parada | l6-alto-de-extremadura | Alto de Extremadura| 40°24'36"N | 3°44'20"W
+parada | l6-puerta-del-angel    | Puerta del Ángel   | 40°24'50"N | 3°44'12"W
+parada | l6-principe-pio        | Príncipe Pío       | 40°25'16"N | 3°43'13"W
+parada | l6-arguelles           | Argüelles          | 40°25'50"N | 3°42'57"W
+parada | l6-moncloa             | Moncloa            | 40°26'07"N | 3°43'09"W
+parada | l6-ciudad-universitaria| Ciudad Universitaria| 40°26'37"N | 3°43'36"W
+parada | l6-guzman-el-bueno     | Guzmán el Bueno    | 40°26'47"N | 3°42'44"W
+
+linea   | 6 | Circular | 9E9E9E
+sentido | 6 | 0 | l6-cuatro-caminos l6-nuevos-ministerios l6-republica-argentina l6-avenida-de-america l6-diego-de-leon l6-manuel-becerra l6-odonnell l6-sainz-de-baranda l6-conde-de-casal l6-pacifico l6-mendez-alvaro l6-arganzuela-planetario l6-usera l6-legazpi l6-plaza-eliptica l6-opanel l6-oporto l6-carpetana l6-laguna l6-lucero l6-alto-de-extremadura l6-puerta-del-angel l6-principe-pio l6-arguelles l6-moncloa l6-ciudad-universitaria l6-guzman-el-bueno l6-cuatro-caminos
+sentido | 6 | 1 | l6-cuatro-caminos l6-guzman-el-bueno l6-ciudad-universitaria l6-moncloa l6-arguelles l6-principe-pio l6-puerta-del-angel l6-alto-de-extremadura l6-lucero l6-laguna l6-carpetana l6-oporto l6-opanel l6-plaza-eliptica l6-legazpi l6-usera l6-arganzuela-planetario l6-mendez-alvaro l6-pacifico l6-conde-de-casal l6-sainz-de-baranda l6-odonnell l6-manuel-becerra l6-diego-de-leon l6-avenida-de-america l6-republica-argentina l6-nuevos-ministerios l6-cuatro-caminos
+
+# ---- Línea 10 (31 paradas completas; en obras el tramo Cuzco-Nuevos Ministerios durante 2026, pero
+#      eso es una interrupción temporal del servicio, no afecta al trazado ni a las coordenadas) ----
+parada | l10-hospital-infanta-sofia| Hospital Infanta Sofía| 40°33'35"N | 3°36'41"W
+parada | l10-reyes-catolicos     | Reyes Católicos     | 40°33'01"N | 3°37'24"W
+parada | l10-baunatal            | Baunatal             | 40°33'16"N | 3°38'06"W
+parada | l10-manuel-de-falla     | Manuel de Falla      | 40°33'02"N | 3°38'49"W
+parada | l10-marques-de-la-valdavia| Marqués de la Valdavia| 40°32'32"N | 3°39'0"W
+parada | l10-la-moraleja         | La Moraleja          | 40°31'55"N | 3°38'08"W
+parada | l10-la-granja           | La Granja            | 40°31'39"N | 3°39'31"W
+parada | l10-ronda-de-la-comunicacion| Ronda de la Comunicación| 40°30'56"N | 3°39'46"W
+parada | l10-las-tablas          | Las Tablas           | 40°30'30"N | 3°40'10"W
+parada | l10-montecarmelo        | Montecarmelo         | 40°30'19"N | 3°41'45"W
+parada | l10-tres-olivos         | Tres Olivos          | 40°30'04"N | 3°41'43"W
+parada | l10-fuencarral          | Fuencarral           | 40°29'41"N | 3°41'33"W
+parada | l10-begona              | Begoña               | 40°28'49"N | 3°41'09"W
+parada | l10-chamartin           | Chamartín            | 40°28'20"N | 3°40'58"W
+parada | l10-plaza-de-castilla   | Plaza de Castilla    | 40°28'01"N | 3°41'21"W
+parada | l10-cuzco               | Cuzco                | 40°27'30"N | 3°41'23"W
+parada | l10-santiago-bernabeu   | Santiago Bernabéu    | 40°27'08"N | 3°41'25"W
+parada | l10-nuevos-ministerios  | Nuevos Ministerios   | 40°26'48"N | 3°41'33"W
+parada | l10-gregorio-maranon    | Gregorio Marañón     | 40°26'18"N | 3°41'29"W
+parada | l10-alonso-martinez     | Alonso Martínez      | 40°25'40"N | 3°41'45"W
+parada | l10-tribunal            | Tribunal             | 40°25'34"N | 3°42'04"W
+parada | l10-plaza-de-espana     | Plaza de España      | 40°25'24"N | 3°42'40"W
+parada | l10-principe-pio        | Príncipe Pío         | 40°25'16"N | 3°43'13"W
+parada | l10-lago                | Lago                 | 40°24'59"N | 3°44'08"W
+parada | l10-batan               | Batán                | 40°24'28"N | 3°45'11"W
+parada | l10-casa-de-campo       | Casa de Campo        | 40°24'12"N | 3°45'40"W
+parada | l10-colonia-jardin      | Colonia Jardín       | 40°23'49"N | 3°46'29"W
+parada | l10-aviacion-espanola   | Aviación Española    | 40°23'01"N | 3°47'02"W
+parada | l10-cuatro-vientos      | Cuatro Vientos       | 40°22'40"N | 3°47'29"W
+parada | l10-joaquin-vilumbrales | Joaquín Vilumbrales  | 40°20'59"N | 3°48'26"W
+parada | l10-puerta-del-sur      | Puerta del Sur       | 40°20'43"N | 3°48'44"W
+
+linea   | 10 | Hospital Infanta Sofía – Puerta del Sur | 06529E
+sentido | 10 | 0 | l10-hospital-infanta-sofia l10-reyes-catolicos l10-baunatal l10-manuel-de-falla l10-marques-de-la-valdavia l10-la-moraleja l10-la-granja l10-ronda-de-la-comunicacion l10-las-tablas l10-montecarmelo l10-tres-olivos l10-fuencarral l10-begona l10-chamartin l10-plaza-de-castilla l10-cuzco l10-santiago-bernabeu l10-nuevos-ministerios l10-gregorio-maranon l10-alonso-martinez l10-tribunal l10-plaza-de-espana l10-principe-pio l10-lago l10-batan l10-casa-de-campo l10-colonia-jardin l10-aviacion-espanola l10-cuatro-vientos l10-joaquin-vilumbrales l10-puerta-del-sur
+sentido | 10 | 1 | l10-puerta-del-sur l10-joaquin-vilumbrales l10-cuatro-vientos l10-aviacion-espanola l10-colonia-jardin l10-casa-de-campo l10-batan l10-lago l10-principe-pio l10-plaza-de-espana l10-tribunal l10-alonso-martinez l10-gregorio-maranon l10-nuevos-ministerios l10-santiago-bernabeu l10-cuzco l10-plaza-de-castilla l10-chamartin l10-begona l10-fuencarral l10-tres-olivos l10-montecarmelo l10-las-tablas l10-ronda-de-la-comunicacion l10-la-granja l10-la-moraleja l10-marques-de-la-valdavia l10-manuel-de-falla l10-baunatal l10-reyes-catolicos l10-hospital-infanta-sofia

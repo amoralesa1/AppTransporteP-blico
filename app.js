@@ -19,7 +19,7 @@ const CIUDADES = {
     { nombre: "Otro", otro: true },
   ],
   "Metro": [
-    { nombre: "Metro de Madrid" },
+    { nombre: "Metro de Madrid", data: "data/madrid-metro.json" },   // líneas 1, 3, 4, 6, 8 y 10
     { nombre: "TMB Barcelona" },
   ],
   "Tren": [
@@ -444,38 +444,6 @@ $("exportar").addEventListener("click", () => {
 
 /* ---------- Arranque ---------- */
 
-async function diagnostico() {
-  const el = document.getElementById("diag");
-  if (!el) return;
-  const modo = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone ? "standalone (icono)" : "navegador (Safari)";
-  let ls = "no disponible";
-  try {
-    const k = "__test__"; localStorage.setItem(k, "1"); localStorage.removeItem(k);
-    ls = "funciona";
-  } catch (e) { ls = "ERROR: " + e.message; }
-  const cfg = (() => { try { return JSON.parse(localStorage.getItem("trayectos.sheets.v1")) || {}; } catch { return {}; } })();
-
-  // "controller" solo existe a partir de la SEGUNDA carga tras registrar el SW: no sirve para
-  // saber si el registro existe. Miramos el registro real, que es lo que persiste entre cargas.
-  let sw = "sin soporte";
-  if ("serviceWorker" in navigator) {
-    try {
-      const reg = await navigator.serviceWorker.getRegistration();
-      sw = reg ? "registrado (" + (reg.active ? "activo" : reg.installing ? "instalando" : "esperando") + ")"
-               : "NO registrado";
-    } catch (e) { sw = "error: " + e.message; }
-  }
-
-  el.textContent =
-    "modo: " + modo + "\n" +
-    "origen: " + location.origin + location.pathname + "\n" +
-    "localStorage: " + ls + "\n" +
-    "config. guardada: " + (cfg.url ? "SÍ (" + cfg.url.slice(0, 40) + "…)" : "NO") + "\n" +
-    "trayectos guardados: " + (JSON.parse(localStorage.getItem("trayectos.v1") || "[]").length) + "\n" +
-    "service worker: " + sw;
-}
-diagnostico();
-
 el.fecha.value = hoyLocal();
 migrar();
 { const c = cfgLeer(); ui.url.value = c.url || ""; ui.token.value = c.token || ""; }
@@ -483,10 +451,5 @@ render();
 sincronizar();
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js")
-    .then(() => diagnostico())          // el registro ya existe: refresca el recuadro
-    .catch((e) => {
-      const el = document.getElementById("diag");
-      if (el) el.textContent += "\n¡ERROR al registrar el service worker!: " + e.message;
-    });
+  navigator.serviceWorker.register("sw.js").catch(() => {});
 }
